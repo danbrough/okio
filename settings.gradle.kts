@@ -4,10 +4,10 @@ includeBuild("build-support")
 
 include(":okio")
 include(":okio-bom")
-include(":okio-fakefilesystem")
-if (System.getProperty("kjs", "true").toBoolean()) {
+//include(":okio-fakefilesystem")
+/*if (System.getProperty("kjs", "true").toBoolean()) {
   include(":okio-nodefilesystem")
-}
+}*/
 include(":okio-testing-support")
 include(":okio:jvm:japicmp")
 include(":okio:jvm:jmh")

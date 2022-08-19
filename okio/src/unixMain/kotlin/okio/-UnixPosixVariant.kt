@@ -25,7 +25,6 @@ import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.toKString
 import okio.Path.Companion.toPath
 import okio.internal.toPath
-import platform.posix.DEFFILEMODE
 import platform.posix.ENOENT
 import platform.posix.FILE
 import platform.posix.O_CREAT
@@ -51,6 +50,8 @@ import platform.posix.rename
 import platform.posix.stat
 import platform.posix.symlink
 import platform.posix.timespec
+
+const val DEFAULT_FILE_MODE = 438 //0660
 
 internal actual val PLATFORM_TEMPORARY_DIRECTORY: Path
   get() {
@@ -143,7 +144,7 @@ internal actual fun PosixFileSystem.variantOpenReadWrite(
     else -> O_RDWR or O_CREAT
   }
 
-  val fid = open(file.toString(), flags, DEFFILEMODE)
+  val fid = open(file.toString(), flags, DEFAULT_FILE_MODE)
   if (fid == -1) throw errnoToIOException(errno)
 
   // Use 'r+' to get reading and writing on the FILE, which is all we need.

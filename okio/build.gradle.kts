@@ -79,7 +79,7 @@ kotlin {
         implementation(deps.kotlin.test)
         implementation(deps.kotlin.time)
 
-        implementation(project(":okio-fakefilesystem"))
+        //implementation(project(":okio-fakefilesystem"))
         implementation(project(":okio-testing-support"))
       }
     }
@@ -122,12 +122,15 @@ kotlin {
       createSourceSet("nativeMain", parent = nonJvmMain)
         .also { nativeMain ->
           createSourceSet("mingwMain", parent = nativeMain, children = mingwTargets)
+
           createSourceSet("unixMain", parent = nativeMain)
             .also { unixMain ->
+              createSourceSet("androidMain", parent = unixMain, children = androidTargets)
               createSourceSet("linuxMain", parent = unixMain, children = linuxTargets)
               createSourceSet("appleMain", parent = unixMain, children = appleTargets)
             }
         }
+
 
       createSourceSet("nativeTest", parent = commonTest, children = mingwTargets + linuxTargets)
         .also { nativeTest ->

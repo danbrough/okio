@@ -41,7 +41,7 @@ kotlin {
         api(deps.kotlin.time)
         api(project(":okio"))
         api(deps.kotlin.test)
-        implementation(project(":okio-fakefilesystem"))
+       // implementation(project(":okio-fakefilesystem"))
       }
     }
     getByName("jvmMain") {
