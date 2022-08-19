@@ -25,31 +25,7 @@ import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.toKString
 import okio.Path.Companion.toPath
 import okio.internal.toPath
-import platform.posix.ENOENT
-import platform.posix.FILE
-import platform.posix.O_CREAT
-import platform.posix.O_EXCL
-import platform.posix.O_RDWR
-import platform.posix.PATH_MAX
-import platform.posix.S_IFLNK
-import platform.posix.S_IFMT
-import platform.posix.errno
-import platform.posix.fdopen
-import platform.posix.fileno
-import platform.posix.fopen
-import platform.posix.free
-import platform.posix.getenv
-import platform.posix.mkdir
-import platform.posix.open
-import platform.posix.pread
-import platform.posix.pwrite
-import platform.posix.readlink
-import platform.posix.realpath
-import platform.posix.remove
-import platform.posix.rename
-import platform.posix.stat
-import platform.posix.symlink
-import platform.posix.timespec
+import platform.posix.*
 
 const val DEFAULT_FILE_MODE = 438 //0660
 
@@ -174,7 +150,7 @@ internal fun variantPread(
   target: CValuesRef<*>,
   byteCount: Int,
   offset: Long
-): Int = pread(fileno(file), target, byteCount.convert(), offset).convert()
+): Int = pread(fileno(file), target, byteCount.convert(), offset as off_t).convert()
 
 @OptIn(UnsafeNumber::class)
 internal fun variantPwrite(
@@ -182,7 +158,7 @@ internal fun variantPwrite(
   source: CValuesRef<*>,
   byteCount: Int,
   offset: Long
-): Int = pwrite(fileno(file), source, byteCount.convert(), offset).convert()
+): Int = pwrite(fileno(file), source, byteCount.convert(), offset as off_t).convert()
 
 @OptIn(UnsafeNumber::class)
 internal val timespec.epochMillis: Long

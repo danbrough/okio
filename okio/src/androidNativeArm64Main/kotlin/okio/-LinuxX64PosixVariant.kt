@@ -18,13 +18,8 @@ package okio
 import kotlinx.cinterop.alloc
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.ptr
-import platform.posix.ENOENT
-import platform.posix.S_IFDIR
-import platform.posix.S_IFMT
-import platform.posix.S_IFREG
-import platform.posix.errno
-import platform.posix.lstat
-import platform.posix.stat
+import platform.posix.*
+
 
 internal actual fun PosixFileSystem.variantMetadataOrNull(path: Path): FileMetadata? {
   return memScoped {
