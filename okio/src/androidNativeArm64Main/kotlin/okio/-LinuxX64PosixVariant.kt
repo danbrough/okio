@@ -20,7 +20,6 @@ import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.ptr
 import platform.posix.*
 
-
 internal actual fun PosixFileSystem.variantMetadataOrNull(path: Path): FileMetadata? {
   return memScoped {
     val stat = alloc<stat>()
@@ -29,10 +28,10 @@ internal actual fun PosixFileSystem.variantMetadataOrNull(path: Path): FileMetad
       throw errnoToIOException(errno)
     }
     return@memScoped FileMetadata(
-      isRegularFile = stat.st_mode.toInt() and S_IFMT == S_IFREG,
-      isDirectory = stat.st_mode.toInt() and S_IFMT == S_IFDIR,
+      isRegularFile = (stat.st_mode as off_t and S_IFMT as off_t) as off_t == S_IFREG as off_t,
+      isDirectory = stat.st_mode as off_t and S_IFMT as off_t == S_IFDIR as off_t,
       symlinkTarget = symlinkTarget(stat, path),
-      size = stat.st_size,
+      size = stat.st_size as Long?,
       createdAtMillis = stat.st_ctim.epochMillis,
       lastModifiedAtMillis = stat.st_mtim.epochMillis,
       lastAccessedAtMillis = stat.st_atim.epochMillis

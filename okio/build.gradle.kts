@@ -125,7 +125,7 @@ kotlin {
 
           createSourceSet("unixMain", parent = nativeMain)
             .also { unixMain ->
-              createSourceSet("androidMain", parent = unixMain, children = androidTargets)
+              createSourceSet("androidNativeMain", parent = unixMain, children = androidTargets)
               createSourceSet("linuxMain", parent = unixMain, children = linuxTargets)
               createSourceSet("appleMain", parent = unixMain, children = appleTargets)
             }

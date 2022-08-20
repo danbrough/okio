@@ -18,3 +18,6 @@ if (System.getProperties().containsKey("android.injected.invoked.from.ide") ||
   System.getenv("ANDROID_SDK_ROOT") != null) {
   include(":android-test")
 }
+
+
+include(":demo")
