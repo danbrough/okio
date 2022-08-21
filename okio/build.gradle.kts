@@ -119,6 +119,18 @@ kotlin {
     }
 
     if (kmpNativeEnabled) {
+      createSourceSet("androidNativeMain", parent = nonJvmMain)
+        .also { androidNativeMain ->
+          createSourceSet("androidUnixMain", parent = androidNativeMain)
+            .also { androidUnixMain ->
+              createSourceSet(
+                "androidMain",
+                parent = androidUnixMain,
+                children = androidTargets
+              )
+            }
+        }
+
       createSourceSet("nativeMain", parent = nonJvmMain)
         .also { nativeMain ->
           createSourceSet("mingwMain", parent = nativeMain, children = mingwTargets)
