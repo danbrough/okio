@@ -181,6 +181,6 @@ subprojects {
 
 tasks.register("publishApple"){
   appleTargets.forEach {
-    dependsOn(tasks.findByPath("publish${it.capitalize()}PublicationToMavenCentralRepository"))
+    dependsOn(tasks.getByPath("okio:publish${it.capitalize()}PublicationToMavenCentralRepository"))
   }
 }
