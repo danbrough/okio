@@ -178,3 +178,9 @@ subprojects {
     }
   }
 }
+
+tasks.register("publishApple"){
+  appleTargets.forEach {
+    dependsOn(tasks.getByName("publish${it.capitalize()}ToMavenCentralRepository"))
+  }
+}
