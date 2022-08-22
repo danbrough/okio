@@ -78,9 +78,8 @@ kotlin {
       dependencies {
         implementation(deps.kotlin.test)
         implementation(deps.kotlin.time)
-
-/*        implementation(project(":okio-fakefilesystem"))
-        implementation(project(":okio-testing-support"))*/
+        implementation(project(":okio-fakefilesystem"))
+        implementation(project(":okio-testing-support"))
       }
     }
 

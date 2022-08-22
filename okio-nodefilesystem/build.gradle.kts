@@ -43,15 +43,15 @@ kotlin {
         // implementation(npm("@types/node", "14.14.16", true))
       }
     }
-    val test by getting {
+/*    val test by getting {
       dependencies {
         implementation(deps.kotlin.test)
         implementation(deps.kotlin.time)
 
-        implementation(project(":okio-fakefilesystem"))
+         implementation(project(":okio-fakefilesystem"))
         implementation(project(":okio-testing-support"))
       }
-    }
+    }*/
   }
 }
 

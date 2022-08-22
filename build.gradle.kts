@@ -145,6 +145,12 @@ allprojects {
   }
 }
 
+allprojects {
+  repositories {
+    maven("https://s01.oss.sonatype.org/content/groups/staging/")
+  }
+}
+
 subprojects {
   apply(plugin = "com.diffplug.spotless")
   configure<SpotlessExtension> {
