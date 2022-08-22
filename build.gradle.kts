@@ -185,8 +185,3 @@ subprojects {
   }
 }
 
-tasks.register("publishApple"){
-  appleTargets.forEach {
-    dependsOn(tasks.getByPath("okio:publish${it.capitalize()}PublicationToMavenCentralRepository"))
-  }
-}
