@@ -134,9 +134,8 @@ kotlin {
             .also { unixMain ->
               createSourceSet("linuxMain", parent = unixMain, children = linux64Targets + linux32Targets)
               createSourceSet("appleMain", parent = unixMain, children = appleTargets)
-
-
             }
+
 //          createSourceSet("unix32Main", parent = nativeMain)
 //            .also { unix32Main ->
 //              createSourceSet("linux32Main", parent = unix32Main, children = linux32Targets)
@@ -145,6 +144,12 @@ kotlin {
 //            .also { unixAndroidMain ->
 //              createSourceSet("androidMain", parent = unixAndroidMain, children = androidTargets)
 //            }
+        }
+
+        createSourceSet("androidNativeMain",parent = nonJvmMain).also { androidNativeMain ->
+          createSourceSet("androidUnixMain", parent = androidNativeMain).also { androidUnixMain ->
+            createSourceSet("androidMain", parent = androidUnixMain, children = androidTargets)
+          }
         }
 
 //      createSourceSet("native32Main", parent = nonJvmMain)

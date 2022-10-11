@@ -18,7 +18,7 @@ fun KotlinMultiplatformExtension.configureOrCreateNativePlatforms() {
   // Required to generate tests tasks: https://youtrack.jetbrains.com/issue/KT-26547
   linuxX64()
  linuxArm32Hfp()
-//androidNativeArm32()
+androidNativeArm32()
 //  androidNativeX86()
   linuxArm64()
 
