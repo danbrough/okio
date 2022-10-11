@@ -34,8 +34,15 @@ plugins {
  *       |   |   |-- watchosArm32
  *       |   |   |-- watchosArm64
  *       |   |   '-- watchosX86
- *       |   '-- linux
+ *       |   '-- linux64
  *       |       '-- linuxX64
+ *       |       '-- linuxArm64
+ *       |       '-- androidNativeArm64
+ *       |       '-- androidNativeX64
+ *       |   '-- linux32
+ *       |       '-- linuxArm32Hfp
+ *       |       '-- androidNativeArm32
+ *       |       '-- androidNativeX86
  *       '-- mingw
  *           '-- mingwX64
  * ```
@@ -124,12 +131,20 @@ kotlin {
           createSourceSet("mingwMain", parent = nativeMain, children = mingwTargets)
           createSourceSet("unixMain", parent = nativeMain)
             .also { unixMain ->
-              createSourceSet("linuxMain", parent = unixMain, children = linuxTargets)
+              createSourceSet("linux64Main",parent=unixMain,children = linux64Targets)
               createSourceSet("appleMain", parent = unixMain, children = appleTargets)
             }
         }
 
-      createSourceSet("nativeTest", parent = commonTest, children = mingwTargets + linuxTargets)
+      createSourceSet("native32Main", parent = nonJvmMain)
+        .also { native32Main ->
+          createSourceSet("unix32Main", parent = native32Main)
+            .also { unix32Main ->
+              createSourceSet("linux32Main", parent = unix32Main, children = linux32Targets)
+            }
+        }
+
+      createSourceSet("nativeTest", parent = commonTest, children = mingwTargets + linux64Targets)
         .also { nativeTest ->
           nativeTest.dependsOn(nonJvmTest)
           createSourceSet("appleTest", parent = nativeTest, children = appleTargets)
