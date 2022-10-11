@@ -19,12 +19,12 @@ fun KotlinMultiplatformExtension.configureOrCreateNativePlatforms() {
   linuxX64()
  linuxArm32Hfp()
 androidNativeArm32()
-//  androidNativeX86()
+  androidNativeX86()
   linuxArm64()
 
-  //androidNativeArm64()
+  androidNativeArm64()
 
-  //androidNativeX64()
+  androidNativeX64()
   macosX64()
   macosArm64()
   mingwX64()
@@ -63,7 +63,10 @@ val linux32Targets = listOf(
 )
 
 val androidTargets = listOf(
-  "androidNativeArm32"
+  "androidNativeArm32",
+  "androidNativeArm64",
+  "androidNativeX86",
+  "androidNativeX64"
 )
 val nativeTargets = appleTargets  + linux64Targets + mingwTargets
 
