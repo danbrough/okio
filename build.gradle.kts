@@ -100,7 +100,7 @@ allprojects {
       }
     }
     configure<MavenPublishBaseExtension> {
-      publishToMavenCentral(SonatypeHost.S01)
+      publishToMavenCentral(SonatypeHost.S01,System.getenv("SONATYPE_REPO_ID"))
       signAllPublications()
 
       pom {
