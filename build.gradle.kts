@@ -11,6 +11,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSearch.url
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -50,6 +51,7 @@ allprojects {
   version = project.property("VERSION_NAME") as String
 
   repositories {
+    maven("https://s01.oss.sonatype.org/content/groups/staging")
     mavenCentral()
     google()
   }
@@ -90,9 +92,17 @@ allprojects {
 
   plugins.withId("com.vanniktech.maven.publish.base") {
     val publishingExtension = extensions.getByType(PublishingExtension::class.java)
+    publishingExtension.apply {
+      repositories {
+        maven("/usr/local/kotlinxtras/build/m2"){
+          name = "M2"
+        }
+      }
+    }
     configure<MavenPublishBaseExtension> {
       publishToMavenCentral(SonatypeHost.S01)
       signAllPublications()
+
       pom {
         description.set("A modern I/O API for Java")
         name.set(project.name)
@@ -178,3 +188,4 @@ subprojects {
     }
   }
 }
+
