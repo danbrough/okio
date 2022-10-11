@@ -50,16 +50,10 @@ val mingwTargets = listOf(
   "mingwX64"
 )
 
-val linux64Targets = listOf(
+val linuxTargets = listOf(
   "linuxX64",
   "linuxArm64",
-  //"androidNativeArm64",
-// "androidNativeX64"
-)
-val linux32Targets = listOf(
   "linuxArm32Hfp",
- // "androidNativeArm32",
- // "androidNativeX86"
 )
 
 val androidTargets = listOf(
@@ -68,7 +62,7 @@ val androidTargets = listOf(
   "androidNativeX86",
   "androidNativeX64"
 )
-val nativeTargets = appleTargets  + linux64Targets + mingwTargets
+val nativeTargets = appleTargets  + linuxTargets + mingwTargets
 
 /**
  * Creates a source set for a directory that isn't already a built-in platform. Use this to create

@@ -132,7 +132,7 @@ kotlin {
           createSourceSet("mingwMain", parent = nativeMain, children = mingwTargets)
           createSourceSet("unixMain", parent = nativeMain)
             .also { unixMain ->
-              createSourceSet("linuxMain", parent = unixMain, children = linux64Targets + linux32Targets)
+              createSourceSet("linuxMain", parent = unixMain, children = linuxTargets)
               createSourceSet("appleMain", parent = unixMain, children = appleTargets)
             }
 
