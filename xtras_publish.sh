@@ -9,7 +9,8 @@ TASKS="publishAllPublicationsToMavenCentralRepository"
 
 
 OPTS="-PSONATYPE_REPO_ID=$SONATYPE_REPO_ID \
- -PmavenCentralUsername=$SONATYPE_USER -PmavenCentralPassword=$SONATYPE_PASSWORD"
+ -PmavenCentralUsername=$SONATYPE_USER -PmavenCentralPassword=$SONATYPE_PASSWORD \
+ -PsignPublications -PpublishDocs "
 
 if [ "$(uname)" = "Darwin" ]; then
 	TASKS="$(cat mac_targets.txt)"

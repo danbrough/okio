@@ -57,6 +57,10 @@ kotlin {
 
 configure<MavenPublishBaseExtension> {
   configure(
-    KotlinJs(javadocJar = Dokka("dokkaGfm"))
+    com.vanniktech.maven.publish.KotlinMultiplatform(
+      javadocJar = if (hasProperty("publishDocs")) Dokka(
+        "dokkaGfm"
+      ) else com.vanniktech.maven.publish.JavadocJar.Empty()
+    )
   )
 }

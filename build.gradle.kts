@@ -101,7 +101,8 @@ allprojects {
     }
     configure<MavenPublishBaseExtension> {
       publishToMavenCentral(SonatypeHost.S01,System.getenv("SONATYPE_REPO_ID"))
-      signAllPublications()
+      if (hasProperty("signPublications"))
+        signAllPublications()
 
       pom {
         description.set("A modern I/O API for Java")

@@ -1,4 +1,5 @@
 import aQute.bnd.gradle.BundleTaskConvention
+import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.JavadocJar.Dokka
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
@@ -131,18 +132,28 @@ kotlin {
           createSourceSet("mingwMain", parent = nativeMain, children = mingwTargets)
           createSourceSet("unixMain", parent = nativeMain)
             .also { unixMain ->
-              createSourceSet("linux64Main",parent=unixMain,children = linux64Targets)
+              createSourceSet("linuxMain", parent = unixMain, children = linux64Targets + linux32Targets)
               createSourceSet("appleMain", parent = unixMain, children = appleTargets)
+
+
             }
+//          createSourceSet("unix32Main", parent = nativeMain)
+//            .also { unix32Main ->
+//              createSourceSet("linux32Main", parent = unix32Main, children = linux32Targets)
+//            }
+//          createSourceSet("unixAndroidMain", parent = nativeMain)
+//            .also { unixAndroidMain ->
+//              createSourceSet("androidMain", parent = unixAndroidMain, children = androidTargets)
+//            }
         }
 
-      createSourceSet("native32Main", parent = nonJvmMain)
-        .also { native32Main ->
-          createSourceSet("unix32Main", parent = native32Main)
-            .also { unix32Main ->
-              createSourceSet("linux32Main", parent = unix32Main, children = linux32Targets)
-            }
-        }
+//      createSourceSet("native32Main", parent = nonJvmMain)
+//        .also { native32Main ->
+//          createSourceSet("unix32Main", parent = native32Main)
+//            .also { unix32Main ->
+//              createSourceSet("linux32Main", parent = unix32Main, children = linux32Targets)
+//            }
+//        }
 
       createSourceSet("nativeTest", parent = commonTest, children = mingwTargets + linux64Targets)
         .also { nativeTest ->
@@ -197,6 +208,6 @@ dependencies {
 
 configure<MavenPublishBaseExtension> {
   configure(
-    KotlinMultiplatform(javadocJar = Dokka("dokkaGfm"))
+    KotlinMultiplatform(javadocJar = if (hasProperty("publishDocs")) Dokka("dokkaGfm") else JavadocJar.Empty())
   )
 }
