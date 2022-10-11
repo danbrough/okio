@@ -160,7 +160,7 @@ kotlin {
 //            }
 //        }
 
-      createSourceSet("nativeTest", parent = commonTest, children = mingwTargets + linux64Targets)
+      createSourceSet("nativeTest", parent = commonTest, children = mingwTargets + linuxTargets)
         .also { nativeTest ->
           nativeTest.dependsOn(nonJvmTest)
           createSourceSet("appleTest", parent = nativeTest, children = appleTargets)
