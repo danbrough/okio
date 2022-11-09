@@ -25,7 +25,6 @@ import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.toKString
 import okio.Path.Companion.toPath
 import okio.internal.toPath
-import platform.posix.DEFFILEMODE
 import platform.posix.ENOENT
 import platform.posix.FILE
 import platform.posix.O_CREAT
@@ -54,6 +53,7 @@ import platform.posix.stat
 import platform.posix.symlink
 import platform.posix.timespec
 
+const val DEFFILEMODE = 0660
 internal actual val PLATFORM_TEMPORARY_DIRECTORY: Path
   get() {
     val tmpdir = getenv("TMPDIR")
