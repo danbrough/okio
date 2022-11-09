@@ -28,6 +28,8 @@ import platform.posix.fflush
 import platform.posix.fileno
 import platform.posix.fstat
 import platform.posix.ftruncate
+import platform.posix.off_t
+import platform.posix.size_t
 import platform.posix.stat
 
 internal class UnixFileHandle(
@@ -40,7 +42,7 @@ internal class UnixFileHandle(
       if (fstat(fileno(file), stat.ptr) != 0) {
         throw errnoToIOException(errno)
       }
-      return stat.st_size
+      return stat.st_size.toLong()
     }
   }
 
@@ -77,7 +79,7 @@ internal class UnixFileHandle(
   }
 
   override fun protectedResize(size: Long) {
-    if (ftruncate(fileno(file), size) == -1) {
+    if (ftruncate(fileno(file), size as off_t) == -1) {
       throw errnoToIOException(errno)
     }
   }

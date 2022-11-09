@@ -24,6 +24,7 @@ import platform.posix.S_IFMT
 import platform.posix.S_IFREG
 import platform.posix.errno
 import platform.posix.lstat
+import platform.posix.size_t
 import platform.posix.stat
 
 internal actual fun PosixFileSystem.variantMetadataOrNull(path: Path): FileMetadata? {
@@ -37,7 +38,7 @@ internal actual fun PosixFileSystem.variantMetadataOrNull(path: Path): FileMetad
       isRegularFile = stat.st_mode.toInt() and S_IFMT == S_IFREG,
       isDirectory = stat.st_mode.toInt() and S_IFMT == S_IFDIR,
       symlinkTarget = symlinkTarget(stat, path),
-      size = stat.st_size,
+      size = stat.st_size.toLong(),
       createdAtMillis = stat.st_ctim.epochMillis,
       lastModifiedAtMillis = stat.st_mtim.epochMillis,
       lastAccessedAtMillis = stat.st_atim.epochMillis

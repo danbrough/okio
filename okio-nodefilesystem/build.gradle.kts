@@ -57,6 +57,7 @@ kotlin {
 
 configure<MavenPublishBaseExtension> {
   configure(
-    KotlinJs(javadocJar = Dokka("dokkaGfm"))
+    //KotlinJs(javadocJar = Dokka("dokkaGfm"))
+    KotlinJs()
   )
 }

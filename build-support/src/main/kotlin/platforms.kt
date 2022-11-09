@@ -17,6 +17,8 @@ fun KotlinMultiplatformExtension.configureOrCreateNativePlatforms() {
   watchosSimulatorArm64()
   // Required to generate tests tasks: https://youtrack.jetbrains.com/issue/KT-26547
   linuxX64()
+  linuxArm32Hfp()
+  linuxArm64()
   macosX64()
   macosArm64()
   mingwX64()
@@ -43,7 +45,9 @@ val mingwTargets = listOf(
 )
 
 val linuxTargets = listOf(
-  "linuxX64"
+  "linuxX64",
+  "linuxArm32Hfp",
+  "linuxArm64"
 )
 
 val nativeTargets = appleTargets + linuxTargets + mingwTargets

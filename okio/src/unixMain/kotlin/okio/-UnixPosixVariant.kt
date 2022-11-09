@@ -41,6 +41,7 @@ import platform.posix.fopen
 import platform.posix.free
 import platform.posix.getenv
 import platform.posix.mkdir
+import platform.posix.off_t
 import platform.posix.open
 import platform.posix.pread
 import platform.posix.pwrite
@@ -48,6 +49,7 @@ import platform.posix.readlink
 import platform.posix.realpath
 import platform.posix.remove
 import platform.posix.rename
+import platform.posix.size_t
 import platform.posix.stat
 import platform.posix.symlink
 import platform.posix.timespec
@@ -173,7 +175,7 @@ internal fun variantPread(
   target: CValuesRef<*>,
   byteCount: Int,
   offset: Long
-): Int = pread(fileno(file), target, byteCount.convert(), offset).convert()
+): Int = pread(fileno(file), target, byteCount.convert(), offset as off_t).convert()
 
 @OptIn(UnsafeNumber::class)
 internal fun variantPwrite(
@@ -181,7 +183,7 @@ internal fun variantPwrite(
   source: CValuesRef<*>,
   byteCount: Int,
   offset: Long
-): Int = pwrite(fileno(file), source, byteCount.convert(), offset).convert()
+): Int = pwrite(fileno(file), source, byteCount.convert(), offset as off_t).convert()
 
 @OptIn(UnsafeNumber::class)
 internal val timespec.epochMillis: Long

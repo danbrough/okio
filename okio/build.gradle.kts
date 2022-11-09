@@ -191,6 +191,7 @@ dependencies {
 
 configure<MavenPublishBaseExtension> {
   configure(
-    KotlinMultiplatform(javadocJar = Dokka("dokkaGfm"))
+    //KotlinMultiplatform(javadocJar = Dokka("dokkaGfm"))
+    KotlinMultiplatform()
   )
 }
