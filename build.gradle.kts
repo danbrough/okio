@@ -11,7 +11,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSearch.url
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -34,6 +33,7 @@ buildscript {
   }
 
   repositories {
+    mavenLocal()
     mavenCentral()
     gradlePluginPortal()
     google()
@@ -51,6 +51,7 @@ allprojects {
   version = project.property("VERSION_NAME") as String
 
   repositories {
+    mavenLocal()
     maven("https://s01.oss.sonatype.org/content/groups/staging")
     mavenCentral()
     google()

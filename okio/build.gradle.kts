@@ -1,5 +1,4 @@
 import aQute.bnd.gradle.BundleTaskConvention
-import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.JavadocJar.Dokka
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
@@ -35,15 +34,8 @@ plugins {
  *       |   |   |-- watchosArm32
  *       |   |   |-- watchosArm64
  *       |   |   '-- watchosX86
- *       |   '-- linux64
+ *       |   '-- linux
  *       |       '-- linuxX64
- *       |       '-- linuxArm64
- *       |       '-- androidNativeArm64
- *       |       '-- androidNativeX64
- *       |   '-- linux32
- *       |       '-- linuxArm32Hfp
- *       |       '-- androidNativeArm32
- *       |       '-- androidNativeX86
  *       '-- mingw
  *           '-- mingwX64
  * ```
@@ -135,30 +127,7 @@ kotlin {
               createSourceSet("linuxMain", parent = unixMain, children = linuxTargets)
               createSourceSet("appleMain", parent = unixMain, children = appleTargets)
             }
-
-//          createSourceSet("unix32Main", parent = nativeMain)
-//            .also { unix32Main ->
-//              createSourceSet("linux32Main", parent = unix32Main, children = linux32Targets)
-//            }
-//          createSourceSet("unixAndroidMain", parent = nativeMain)
-//            .also { unixAndroidMain ->
-//              createSourceSet("androidMain", parent = unixAndroidMain, children = androidTargets)
-//            }
         }
-
-        createSourceSet("androidNativeMain",parent = nonJvmMain).also { androidNativeMain ->
-          createSourceSet("androidUnixMain", parent = androidNativeMain).also { androidUnixMain ->
-            createSourceSet("androidMain", parent = androidUnixMain, children = androidTargets)
-          }
-        }
-
-//      createSourceSet("native32Main", parent = nonJvmMain)
-//        .also { native32Main ->
-//          createSourceSet("unix32Main", parent = native32Main)
-//            .also { unix32Main ->
-//              createSourceSet("linux32Main", parent = unix32Main, children = linux32Targets)
-//            }
-//        }
 
       createSourceSet("nativeTest", parent = commonTest, children = mingwTargets + linuxTargets)
         .also { nativeTest ->
@@ -213,6 +182,6 @@ dependencies {
 
 configure<MavenPublishBaseExtension> {
   configure(
-    KotlinMultiplatform(javadocJar = if (hasProperty("publishDocs")) Dokka("dokkaGfm") else JavadocJar.Empty())
+    KotlinMultiplatform(javadocJar = Dokka("dokkaGfm"))
   )
 }

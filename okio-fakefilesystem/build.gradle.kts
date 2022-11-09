@@ -23,10 +23,6 @@ kotlin {
           sourceMap = true
           metaInfo = true
         }
-
-        dependencies {
-          compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.3")
-        }
       }
       nodejs {
         testTask {
@@ -82,6 +78,6 @@ dependencies {
 
 configure<MavenPublishBaseExtension> {
   configure(
-    KotlinMultiplatform(javadocJar = if (hasProperty("publishDocs")) Dokka("dokkaGfm") else com.vanniktech.maven.publish.JavadocJar.Empty())
+    KotlinMultiplatform(javadocJar = Dokka("dokkaGfm"))
   )
 }

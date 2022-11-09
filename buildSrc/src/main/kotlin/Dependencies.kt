@@ -23,7 +23,7 @@ object deps {
   object kotlin {
     const val test = "org.jetbrains.kotlin:kotlin-test"
     const val testJunit = "org.jetbrains.kotlin:kotlin-test-junit"
-    const val time = "org.danbrough.kotlinx:kotlinx-datetime:0.3.2"
+    const val time = "org.danbrough.kotlinx:kotlinx-datetime:0.3.3"
 
   }
 
