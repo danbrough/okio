@@ -146,8 +146,10 @@ kotlin {
 
       createSourceSet("androidNativeMain", parent = nonJvmMain)
         .also { androidNativeMain ->
-          createSourceSet("androidMain",parent = androidNativeMain,children = androidTargets).also { androidMain->
-            androidMain.dependsOn(nonAppleMain)
+          createSourceSet("androidUnixMain",parent = androidNativeMain).also { androidUnixMain->
+            createSourceSet("androidLinuxMain", parent = androidUnixMain, children = androidTargets).also { androidLinuxMain ->
+              androidLinuxMain.dependsOn(nonAppleMain)
+            }
           }
         }
     }
