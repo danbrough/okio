@@ -52,6 +52,9 @@ val linuxTargets = listOf(
   "linuxX64",
   "linuxArm32Hfp",
   "linuxArm64",
+)
+
+val androidTargets = listOf(
   "androidNativeArm64",
   "androidNativeArm32",
   "androidNativeX86",

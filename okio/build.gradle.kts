@@ -143,6 +143,13 @@ kotlin {
           nativeTest.dependsOn(nonJvmTest)
           createSourceSet("appleTest", parent = nativeTest, children = appleTargets)
         }
+
+      createSourceSet("androidNativeMain", parent = nonJvmMain)
+        .also { androidNativeMain ->
+          createSourceSet("androidMain",parent = androidNativeMain,children = androidTargets).also { androidMain->
+            androidMain.dependsOn(nonAppleMain)
+          }
+        }
     }
   }
 
