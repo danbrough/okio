@@ -53,7 +53,8 @@ import platform.posix.stat
 import platform.posix.symlink
 import platform.posix.timespec
 
-const val DEFFILEMODE = 0660
+const val DEFFILEMODE = 438 //0660
+
 internal actual val PLATFORM_TEMPORARY_DIRECTORY: Path
   get() {
     val tmpdir = getenv("TMPDIR")
